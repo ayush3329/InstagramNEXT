@@ -1,0 +1,59 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  userId    String      @id @default(uuid())
+  userName  String      @unique
+  firstName String
+  lastName  String
+  email     String      @unique
+  profile   String? // profile picture URL
+  password  String
+  createdAt DateTime    @default(now())
+  Post      Posts[]
+  followers Followers[] @relation("Follower") // list of users that are following the "user"
+  following Followers[] @relation("Following") // list of users that the "user" is following
+  likes     LikeTable[] // list of posts that the "user" has liked
+}
+
+enum PostType {
+  IMAGE
+  VIDEO
+}
+
+model Posts {
+  postId      String   @id @default(uuid()) // primary key for this table
+  postType    PostType
+  postCaption String?
+  postUrl     String   @db.Text()
+
+  userId String // foreign key-> User who created this post
+  user   User   @relation(fields: [userId], references: [userId])
+
+  likes     LikeTable[] // One Post can have multiple like
+  createdAt DateTime    @default(now())
+}
+
+model LikeTable {
+  likeId    String   @id @default(uuid())
+  postId    String
+  userid    String // user who liked the post
+  user      User     @relation(fields: [userid], references: [userId])
+  post      Posts    @relation(fields: [postId], references: [postId])
+  createdAt DateTime @default(now())
+}
+
+model Followers {
+  id          String   @id @default(uuid())
+  followerId  String // foreign key-> User who is following
+  followingId String // foreign key-> User who is being followed
+  follower    User     @relation("Follower", fields: [followerId], references: [userId])
+  following   User     @relation("Following", fields: [followingId], references: [userId])
+  createdAt   DateTime @default(now())
+}
