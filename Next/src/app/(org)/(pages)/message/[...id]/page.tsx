@@ -1,10 +1,11 @@
-"use client"
+'use client'
 import { ScrollArea } from "@/Components/ui/scroll-area";
 import { useSetUpWs } from "@/Hooks/Hooks";
 import { useEffect } from "react";
 
 const Message = () => {
-    
+    console.log(localStorage.getItem("username"))
+    console.log(localStorage.getItem("id"))
     const {ws,setWs} = useSetUpWs({username:localStorage.getItem("username")||"", id:localStorage.getItem("id")||""});
     
     useEffect(()=>{

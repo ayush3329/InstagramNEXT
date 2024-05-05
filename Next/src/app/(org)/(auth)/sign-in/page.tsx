@@ -4,7 +4,7 @@ import Instagram from "@/Assets/InstagramLOGO.png";
 import Image from "next/image";
 import play from "@/Assets/play.png";
 import microsoft from "@/Assets/microsoft.png";
-import SignIn from "@/Components/Sign-In";
+import SignIn from "@/Components/org/Sign-In";
 import {useRecoilValue } from "recoil";
 import { error } from "@/store/Recoil";
 import { useRouter } from "next/navigation";

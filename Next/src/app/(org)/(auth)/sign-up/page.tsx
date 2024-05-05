@@ -4,7 +4,7 @@ import Image from "next/image";
 import play from "@/Assets/play.png";
 import microsoft from "@/Assets/microsoft.png";
 import { useRouter } from "next/navigation";
-import SignUp from "@/Components/Sign-Up";
+import SignUp from "@/Components/org/Sign-Up";
 
 const LoginPage = () => {
     const router = useRouter();

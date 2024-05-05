@@ -16,6 +16,7 @@ export const useUserDetail = (payload:UserDetail = {email:"",id:"",username:"", 
 }
 
 export const useSetUpWs = ({username, id}: {username:string, id:string})=>{
+    console.log(username, id);
     const [ws, setWs] = useState<WebSocket|null>(null);
     
     
